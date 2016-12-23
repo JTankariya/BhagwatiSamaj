@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- CSS Implementing Plugins -->
+<link rel="stylesheet" href="@Url.Content("~/Content/plugins/line-icons/line-icons.css")">
+<link rel="stylesheet" href="@Url.Content("~/Content/plugins/font-awesome/css/font-awesome.min.css")">
+<link rel="stylesheet" href="@Url.Content("~/Content/plugins/flexslider/flexslider.css")">
+<link rel="stylesheet" href="@Url.Content("~/Content/plugins/parallax-slider/css/parallax-slider.css")">
+    <!--=== Slider ===-->
+<div class="slider-inner">
+    <div id="da-slider" class="da-slider">
+        <div class="da-slide">
+            <h2><i>BHAGVATI SAMAJ</i> <br /> <i>WELCOMES YOU</i> <br /> <i>HERE</i></h2>
+            <p><i>you can find candidates for merriage</i> <br /> <i>Latest & upcomming events</i> <br /> <i>You can have your own account</i></p>
+            <div class="da-img"><img class="img-responsive" src="@Url.Content("~/Content/plugins/parallax-slider/img/1.png")" alt="">></div>
+        </div>
+        <div class="da-slide">
+            <h2><i>Upcomming Events</i> <br /> <i>Photos of yagyas</i> <br /> <i>MANY MORE</i></h2>
+            <p><i>You can find latest events updates</i> <br /> <i>its witness as photos</i></p>
+            <div class="da-img">
+                <iframe src="http://player.vimeo.com/video/47911018" width="530" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="da-slide">
+            <h2><i>VERY GOOD COMMUNITY</i> <br /> <i>FAST WORK AND UPDATES</i> <br /> <i>EVENTS & Bio-data </i></h2>
+            <p><i>You can find welknown names of cast</i> <br /> <i>Persons who are serving this</i> <br /> <i>With warm welcome</i></p>
+            <div class="da-img"><img src="@Url.Content("~/Content/plugins/parallax-slider/img/html5andcss3.png")" alt="image01" />></div>
+        </div>
+        <div class="da-arrows">
+            <span class="da-arrows-prev"></span>
+            <span class="da-arrows-next"></span>
+        </div>
+    </div>
+</div><!--/slider-->
+<!--=== End Slider ===-->
+<img src="@Url.Content("~/Content/img/mantra.jpg")" style="width:50%" />
+
+><script type="text/javascript" src="@Url.Content("~/Content/plugins/flexslider/jquery.flexslider-min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/plugins/parallax-slider/js/modernizr.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/plugins/parallax-slider/js/jquery.cslider.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/js/app.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/js/pages/index.js")"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        App.init();
+        App.initSliders();
+        Index.initParallaxSlider();
+    });
+</script>
+<!--[if lt IE 9]>
+    <script src="@Url.Content("~/Content/plugins/respond.js")"></script>
+    <script src="@Url.Content("~/Contentassets/plugins/html5shiv.js")"></script>
+<![endif]-->
+

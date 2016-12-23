@@ -1,0 +1,143 @@
+﻿<div class="header">
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="container">
+            <!-- Topbar Navigation -->
+            <ul class="loginbar pull-right">
+                @*<li>
+                        <i class="fa fa-globe"></i>
+                        <a>Languages</a>
+                        <ul class="lenguages">
+                            <li class="active">
+                                <a href="#">English <i class="fa fa-check"></i></a>
+                            </li>
+                            <li><a href="#">Spanish</a></li>
+                            <li><a href="#">Russian</a></li>
+                            <li><a href="#">German</a></li>
+                        </ul>
+                    </li>*@
+                @if (Session["CurrentUser"] != null)
+                {
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-xs btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Welcome @(((BhagwatiSamaj.Models.User)Session["CurrentUser"]).FirstName + " " + ((BhagwatiSamaj.Models.User)Session["CurrentUser"]).MiddleName + " " + ((BhagwatiSamaj.Models.User)Session["CurrentUser"]).LastName)
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="@Url.Action("UpdateProfile","Account")">Edit Profile</a></li>
+                                <li><a href="@Url.Action("LogOut","Account")">Log Out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+
+                    @*<li><a href="@Url.Action("Register","Account")">Welcome @(((BhagwatiSamaj.Models.User)Session["CurrentUser"]).FirstName + " " + ((BhagwatiSamaj.Models.User)Session["CurrentUser"]).MiddleName + " " + ((BhagwatiSamaj.Models.User)Session["CurrentUser"]).LastName)</a></li>*@
+                }
+                else
+                {
+                    <li class="topbar-devider"></li>
+                    <li><a href="@Url.Action("Register","Account")">Register</a></li>
+                    <li class="topbar-devider"></li>
+                    <li><a href="@Url.Action("Signin","Account")">Login</a></li>
+                }
+
+            </ul>
+            <!-- End Topbar Navigation -->
+        </div>
+    </div>
+    <!-- End Topbar -->
+    <!-- Navbar -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="fa fa-bars"></span>
+                </button>
+                <a class="navbar-brand" href="index-2.html">
+                    <img id="logo-header" src="@Url.Content("~/Content/img/logo1-default.png")" alt="Logo">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                    @if (Session["CurrentUser"]!=null && ((BhagwatiSamaj.Models.User)Session["CurrentUser"]).UserName.ToUpper() == "ADMIN")
+                    {
+                        <!-- Home -->
+                        <li>
+                            <a href="@Url.Action("MemberList","Admin")">
+                                Member Management
+                            </a>
+                        </li>
+                    <!-- End Home -->
+                    <!-- Pages -->
+                        <li>
+                            <a href="@Url.Action("EventList","Admin")">
+                                Event Management
+                            </a>
+                        </li>
+                    <!-- End Pages -->
+                    <!-- Features -->
+                        <li>
+                            <a href="@Url.Action("AdvertizeList","Admin")">
+                                Advertize Management
+                            </a>
+                        </li>
+                    <!-- End Features -->
+                    }
+                    else
+                    {
+                    <!-- Home -->
+                        <li>
+                            <a href="@Url.Action("Index","Dashboard")">
+                                Home
+                            </a>
+                        </li>
+                    <!-- End Home -->
+                    <!-- Pages -->
+                        <li>
+                            <a href="@Url.Action("Gyativad","Dashboard")">
+                                History Of Samaj
+                            </a>
+                        </li>
+                    <!-- End Pages -->
+                    <!-- Features -->
+    <li>
+        <a href="@Url.Action("List","Matrimonials")">
+            Matrimonials
+        </a>
+    </li>
+                        <li>
+                            <a href="@Url.Action("List","Family")">
+                                Families
+                            </a>
+                        </li>
+                    <!-- End Features -->
+                    <!-- Portfolio -->
+                        <li>
+                            <a href="@Url.Action("Events","Dashboard")">
+                                Events
+                            </a>
+                        </li>
+                    <!-- Ens Portfolio -->
+                    <!-- Blog -->
+                        <li>
+                            <a href="@Url.Action("ContactUs","Dashboard")">
+                                Contact Us
+                            </a>
+                        </li>
+                    <!-- End Blog -->
+                    }
+                    
+                </ul>
+            </div><!--/navbar-collapse-->
+        </div>
+    </div>
+    <!-- End Navbar -->
+</div>
+<!--=== End Header ===-->

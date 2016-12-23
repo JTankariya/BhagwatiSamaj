@@ -1,0 +1,145 @@
+﻿@model IEnumerable<BhagwatiSamaj.Models.MatrimonialsViewModel>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a href="@Url.Action("AddMatrimonial", "Matrimonials", new { Id=0})" class="btn btn-success">Add New Matrimonial</a>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-blue">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-tasks"></i> Search Candidate</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @*City : @Html.DropDownList("CitySelect", ((List<SelectListItem>)ViewBag.CityList), "-- Select --", new { @class = "form-control" })*@
+                        @*</div>
+                        <div class="col-md-3">*@
+                            Name : @Html.TextBox("NameSelect","", new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3">
+                            Native Place : @Html.DropDownList("NativePlaceSelect", ((List<SelectListItem>)ViewBag.NativePlaceList), "-- Select --", new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <button type="button" class="btn btn-primary" onclick="SearchMatrimonial()">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div id="matrimonialList">
+        @Html.Partial("_MatrimonialRow", Model)
+    </div>
+
+    @*<div class="row">
+            <div class="col-md-12">
+               <table class="table table-bordered table-hover">
+                   <thead>
+                       <tr>
+                           <td>
+                               Photo
+                           </td>
+                           <td>
+                               Full Name
+                           </td>
+                           <td>
+                               Operations
+                           </td>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       @if (Model != null)
+                       {
+                           foreach (var matrimonial in Model)
+                           {
+                            <tr>
+                                <td>
+                                    <img alt="" src="@(Url.Content(Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["MatrimonialPhotoPath"])+matrimonial.Photo))" class="img-responsive">
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x=>matrimonial.FullName)
+                                </td>
+                                <td>
+                                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("AddMatrimonial", "Matrimonials", new { Id = matrimonial.Id })">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="DeleteConfirmMatrimonial('@matrimonial.Id')">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                           }
+                       }
+                   </tbody>
+               </table>
+            </div>
+        </div>*@
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" style="display:none" id="btnDeleteConfirm" data-toggle="modal" data-target="#deleteConfirmModal">
+    Launch State Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="deleteConfirmModalLabel">Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure want to delete this Matrimonial?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="DeleteMatrimonial()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="@Url.Content("~/Content/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")"></script>
+<script>
+    var isToDelete = 0;
+    function DeleteConfirmMatrimonial(advertizeId) {
+        isToDelete = advertizeId;
+        $('#btnDeleteConfirm').click();
+    }
+
+    function DeleteMatrimonial() {
+        $.ajax({
+            url: '@Url.Action("DeleteMatrimonial", "Matrimonials")',
+            data: { advertizeId: isToDelete },
+            success: function (data) {
+                if (data.IsSuccess) {
+                    $('#deleteConfirmModal [data-dismiss="modal"]').click();
+                    isToDelete = 0;
+                    window.location.reload();
+                }
+                else {
+                    alert(data.ResponseValue);
+                }
+            }
+        });
+    }
+
+    function SearchMatrimonial() {
+        $.ajax({
+            url: '@Url.Action("GetSearchList", "Matrimonials")',
+            data: { Name: $('#NameSelect').val(), NativePlace: $('#NativePlaceSelect').val()},
+            success: function (data) {
+                $('#matrimonialList').html(data);
+            }
+        });
+    }
+</script>

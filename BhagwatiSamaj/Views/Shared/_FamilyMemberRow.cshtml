@@ -1,0 +1,145 @@
+﻿@using BhagwatiSamaj.Helpers;
+@model BhagwatiSamaj.Models.FamilyMember
+<tr>
+    @using (Html.BeginCollectionItem("FamilyMembers"))
+    {
+        <td style="border:1px solid green">
+            @Html.HiddenFor(x => x.Id)
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>First Name<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Middle Name<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.MiddleName, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Last Name<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Gender<span class="color-red">*</span></label>
+                            @{
+        var GenderList = new List<SelectListItem>();
+        GenderList.Add(new SelectListItem() { Text = "Male", Value = "MALE" });
+        GenderList.Add(new SelectListItem() { Text = "Female", Value = "FEMALE" });
+                            }
+                            @Html.DropDownListFor(x => x.Gender, GenderList, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Marital Status<span class="color-red">*</span></label>
+                            @{
+        var MrgList = new List<SelectListItem>();
+        MrgList.Add(new SelectListItem() { Text = "Married", Value = "MERRIED" });
+        MrgList.Add(new SelectListItem() { Text = "Unmerried", Value = "UNMERRIED" });
+                            }
+                            @Html.DropDownListFor(x => x.MaritalStatus, MrgList, new { @class = "form-control margin-bottom-20" })
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Relation With Main Member<span class="color-red">*</span></label>
+                            @{
+        var RelationList = new List<SelectListItem>();
+        RelationList.Add(new SelectListItem() { Text = "Brother", Value = "BROTHER" });
+        RelationList.Add(new SelectListItem() { Text = "Sister", Value = "SISTER" });
+        RelationList.Add(new SelectListItem() { Text = "Son", Value = "SON" });
+        RelationList.Add(new SelectListItem() { Text = "Daughter", Value = "DAUGHTER" });
+        RelationList.Add(new SelectListItem() { Text = "Wife", Value = "WIFE" });
+                            }
+                            @Html.DropDownListFor(x => x.Relation, RelationList, new { @class = "form-control margin-bottom-20" })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Contact No<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.ContactNo, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Email Id<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Mobile No<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Education<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.Education, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Other Skills<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.OtherSkills, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Occupation Type</label>
+                            @{
+        var OccupationList = new List<SelectListItem>();
+        OccupationList.Add(new SelectListItem() { Text = "Business", Value = "BUSINESS" });
+        OccupationList.Add(new SelectListItem() { Text = "Job", Value = "JOB" });
+        OccupationList.Add(new SelectListItem() { Text = "House Wife", Value = "HOUSEWIFE" });
+                            }
+                            @Html.DropDownListFor(x => x.OccupationType, OccupationList, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblLastName" style="color:red;display:none"></label>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Business/Job Title<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.BusinessTitle, new { @class = "form-control" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Business/Job Address<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.BusinessAddress, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Business/Job Position<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.BusinessPosition, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Annual Income<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.AnnualIncome, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Business/Job Contact No<span class="color-red">*</span></label>
+                            @Html.TextBoxFor(x => x.BusinessContactNo, new { @class = "form-control margin-bottom-20" })
+                            <label id="lblEmailId" style="color:red;display:none"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <img class="img-responsive rounded-x" id="imgPic" src="@Url.Content("~/Content/img/demo.jpg")" alt="">
+                    <br />
+                    <button type="button" class="btn btn-primary center-block" onclick="OpenPicUpload(this)">Change Image</button>
+                    <input type="file" accept="image/*" name="fPicMembers" id="fPic" onchange="PicSelected(this)" style="display:none" />
+                </div>
+            </div>
+        </td>
+    }
+</tr>

@@ -1,0 +1,10 @@
+﻿@model BhagwatiSamaj.Models.Country
+
+<div class="row">
+    <div class="col-sm-12">
+        <label>Country Name<span class="color-red">*</span></label>
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control margin-bottom-20",@id="txtNewCountry" })
+        <label id="lblCountryName" style="color:red;display:none"></label>
+    </div>
+</div>
+

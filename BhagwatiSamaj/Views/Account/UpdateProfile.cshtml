@@ -1,0 +1,45 @@
+﻿@model BhagwatiSamaj.Models.User
+@{
+    ViewBag.Title = "Update your profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--=== Content Part ===-->
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <form id="NewRegistration" class="reg-page">
+                <div class="reg-header">
+                    <h2>Update your profile</h2>
+                    @*<p>Already Signed Up? Click <a href="@Url.Action("Signin","Account")" class="color-green">Sign In</a> to login your account.</p>*@
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>First Name</label>
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control margin-bottom-20", @id = "txtFirstName" })
+                        <label id="lblFirstName" style="color:red;display:none"></label>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Last Name</label>
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control margin-bottom-20", @id = "txtLastName" })
+                        <label id="lblLastName" style="color:red;display:none"></label>
+                    </div>
+                </div>
+                <label>User Name</label>
+                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control margin-bottom-20", @id = "txtUserName" })
+                <label id="lblUserName" style="color:red;display:none"></label>
+                <label>Email Address <span class="color-red">*</span></label>
+                @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control margin-bottom-20", @id = "txtEmailId" })
+                <label id="lblEmailId" style="color:red;display:none"></label>
+               
+                <div class="row">
+                    <div class="col-lg-4 text-right">
+                        <button class="btn btn-success" type="button" onclick="RegisterUser()">Update</button>
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4 text-left">
+                        <button class="btn btn-success" type="button" onclick="RegisterUser()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><!--/container-->
