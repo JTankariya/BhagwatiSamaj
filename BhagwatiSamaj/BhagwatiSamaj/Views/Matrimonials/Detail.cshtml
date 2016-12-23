@@ -1,0 +1,448 @@
+﻿@model BhagwatiSamaj.Models.MatrimonialsViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .panel-blue > .panel-heading {
+            background: #C6B1A0;
+    }
+    .panel-blue {
+        border-color: #D0BDAF;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <a data-toggle="collapse" data-target="#headPanel"
+                       href="#headPanel">
+                        <i class="fa fa-tasks"></i>Candidate Information
+                    </a>
+                </h3>
+            </div>
+            <div id="headPanel" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <img src="@Url.Content("~/Content/img/BioDataHeader.jpg")" />
+                    <div class="row" style="background-image:url('@Url.Content("~/Content/img/BioDataBody.jpg")');background-repeat:repeat">
+                        <div class="col-sm-2">
+                            @if (Model.Photo != null && Model.Photo.Length > 0)
+                            {
+                                <img alt="" style="max-height: 300px;margin: 0px auto; max-width: 200px;" src="@(Url.Content(Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["MatrimonialPhotoPath"])+Model.Photo))" class="img-responsive">
+                            }
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                @if (Session["CurrentUser"] != null && ((BhagwatiSamaj.Models.User)Session["CurrentUser"]).Id.ToString() == Model.CreatedBy.ToString())
+                                {
+                                    <div class="col-sm-10">
+                                        <h1 style="font-family:Monotype Corsiva;font-style:italic`;font-size: 3.8em;color: rgb(170, 151, 137);text-shadow: 2px 8px 6px rgba(0,0,0,0.2),0px -5px 35px rgba(255,255,255,0.3);"> @(Model.FullName)</h1>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <a type="button" class="btn btn-primary" href="@Url.Action("AddMatrimonial", "Matrimonials", new { Id = Model.Id })"><span class="glyphicon glyphicon-move"></span> &nbsp;&nbsp; Edit Me</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-12">
+                                        <h1 style="font-family:Monotype Corsiva;font-style:italic;font-size: 3.8em;color: rgb(170, 151, 137);text-shadow: 2px 8px 6px rgba(0,0,0,0.2),0px -5px 35px rgba(255,255,255,0.3);"> @(Model.FullName)</h1>
+                                    </div>
+                                }
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="panel panel-blue">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <a data-toggle="collapse" data-target="#addressPanel"
+                                                   href="#addressPanel">
+                                                    <i class="fa fa-tasks"></i>Address Info
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div id="addressPanel" class="panel-collapse collapse in">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <b>Address</b> : @(Model.Address)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <b>City</b> : @(Model.CityName)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <b>State</b> : @(Model.StateName)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <b>Country</b> : @(Model.CountryName)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-blue">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <a data-toggle="collapse" data-target="#birthPanel"
+                                                   href="#birthPanel">
+                                                    <i class="fa fa-tasks"></i>Birth Info
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div id="birthPanel" class="panel-collapse collapse in">
+                                            @if (Model.DateOfBirth != null)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Date Of Birth :</b> @Model.DateOfBirth.ToShortDateString()
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (Model.BirthTime != null)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Birth Time :</b> @Model.BirthTime.ToString("hh:mm:ss tt")
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(Model.BirthPlace))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Birth Place :</b> @Model.BirthPlace
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-blue">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <a data-toggle="collapse" data-target="#personalPanel"
+                                                   href="#personalPanel">
+                                                    <i class="fa fa-tasks"></i>Personal Info
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div id="personalPanel" class="panel-collapse collapse in">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <b>Gender :</b> @(Model.Gender == "true" ? "Male" : "Female")
+                                                </div>
+                                            </div>
+                                            @if (!string.IsNullOrEmpty(Model.Height))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Height :</b> @Model.Height
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(Model.Weight))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Weight :</b> @Model.Weight
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(Model.Hobby))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Hobby :</b> @Model.Hobby
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(Model.SkinColor))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Skin Color :</b> @Model.SkinColor
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(Model.Education))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Education :</b> @Model.Education
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="panel panel-blue">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <a data-toggle="collapse" data-target="#contactPanel"
+                                                   href="#contactPanel">
+                                                    <i class="fa fa-tasks"></i>Contact Info
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div id="contactPanel" class="panel-collapse collapse in">
+                                            @if (!string.IsNullOrEmpty(Model.ContactNo))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Contact No :</b> @Model.ContactNo
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(Model.EmailId))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Email Id :</b> @Model.EmailId
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-blue">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <a data-toggle="collapse" data-target="#mosalPanel"
+                                                   href="#mosalPanel">
+                                                    <i class="fa fa-tasks"></i>Mosal Info
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div id="mosalPanel" class="panel-collapse collapse in">
+                                            @if (!string.IsNullOrEmpty(Model.MosalName))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Mosal Name :</b> @Model.MosalName
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(Model.MosalVillage))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Mosal Gam :</b> @Model.MosalVillage
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-blue">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <a data-toggle="collapse" data-target="#businessPanel"
+                                                   href="#businessPanel">
+                                                    <i class="fa fa-tasks"></i>Business Info
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div id="businessPanel" class="panel-collapse collapse in">
+                                            @if (!string.IsNullOrEmpty(Model.BusinessType))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Business Type :</b> @Model.BusinessType
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(Model.AnnualIncome))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Annual Income :</b> @Model.AnnualIncome
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(Model.BusinessAddress))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <b>Business Address :</b> @Model.BusinessAddress
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="row">
+                                <div class="col-sm-12">
+                                    <b>Address</b> : @(Model.Address)
+                                </div>
+                            </div>*@
+                            @*<div class="row">
+                                <div class="col-sm-12">
+                                    <b>City</b> : @(Model.CityName)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <b>State</b> : @(Model.StateName)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <b>Country</b> : @(Model.CountryName)
+                                </div>
+                            </div>*@
+                            @*<div class="row">
+                                <div class="col-sm-4">
+                                    <b>Gender :</b> @(Model.Gender == "true" ? "Male" : "Female")
+                                </div>
+                            </div>*@
+                            @*@if (!string.IsNullOrEmpty(Model.Height))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Height :</b> @Model.Height
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Weight))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Weight :</b> @Model.Weight
+                                    </div>
+                                </div>
+                            }*@
+                            @*@if (Model.DateOfBirth != null)
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Date Of Birth :</b> @Model.DateOfBirth.ToShortDateString()
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.BirthTime != null)
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Birth Time :</b> @Model.BirthTime.ToString("hh:mm:ss tt")
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BirthPlace))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Birth Place :</b> @Model.BirthPlace
+                                    </div>
+                                </div>
+                            }*@
+                            @*@if (!string.IsNullOrEmpty(Model.Hobby))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Hobby :</b> @Model.Hobby
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.SkinColor))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Skin Color :</b> @Model.SkinColor
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Education))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Education :</b> @Model.Education
+                                    </div>
+                                </div>
+                            }*@
+                            @*@if (!string.IsNullOrEmpty(Model.ContactNo))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Contact No :</b> @Model.ContactNo
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.EmailId))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Email Id :</b> @Model.EmailId
+                                    </div>
+                                </div>
+                            }*@
+                            @*@if (!string.IsNullOrEmpty(Model.MosalName))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Mosal Name :</b> @Model.MosalName
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.MosalVillage))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Mosal Gam :</b> @Model.MosalVillage
+                                    </div>
+                                </div>
+                            }*@
+                            @*@if (!string.IsNullOrEmpty(Model.BusinessType))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Type :</b> @Model.BusinessType
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.AnnualIncome))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Annual Income :</b> @Model.AnnualIncome
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BusinessAddress))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Address :</b> @Model.BusinessAddress
+                                    </div>
+                                </div>
+                            }*@
+                            @if (!string.IsNullOrEmpty(Model.Description))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Description OR More Info :</b> @Model.Description
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <img src="@Url.Content("~/Content/img/BioDataFooter.jpg")" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

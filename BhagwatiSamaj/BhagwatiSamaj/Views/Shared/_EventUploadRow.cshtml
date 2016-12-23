@@ -1,0 +1,13 @@
+﻿@using BhagwatiSamaj.Helpers;
+@model BhagwatiSamaj.Models.EventUpload
+<tr>
+    @using (Html.BeginCollectionItem("EventUploads"))
+    {
+        <td>
+            @Html.EditorFor(x => x.Id)
+        </td>
+        <td>
+            @Html.EditorFor(x => x.UploadPath)
+        </td>
+    }
+</tr>

@@ -1,0 +1,112 @@
+﻿@model List<BhagwatiSamaj.Models.YagnaMember>
+@{
+    ViewBag.Title = "YagnaMemberList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="@Url.Action("EditYagnaMember", "Admin", new { Id = "0" })" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus-sign"></span> &nbsp;&nbsp;Add new Yagna Member
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            Address
+                        </td>
+                        <td>
+                            Mobile
+                        </td>
+                        <td>
+                            Actions
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var evnt in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @evnt.Name
+                                </td>
+                                <td>
+                                    @evnt.Address
+                                </td>
+                                <td>
+                                    @evnt.Mobile
+                                </td>
+                                <td>
+                                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("EditYagnaMember", "Admin", new { Id = evnt.Id })" onclick="EditYagnaMember('@evnt.Id')">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="DeleteConfirmYagnaMember('@evnt.Id')">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" style="display:none" id="btnDeleteConfirm" data-toggle="modal" data-target="#deleteConfirmModal">
+    Launch State Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="deleteConfirmModalLabel">Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure want to delete this YagnaMember?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="DeleteAdvrtize()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var isToDelete = 0;
+
+    function DeleteConfirmYagnaMember(YagnaMemberId) {
+        isToDelete = YagnaMemberId;
+        $('#btnDeleteConfirm').click();
+    }
+
+    function DeleteAdvrtize() {
+        $.ajax({
+            url: '@Url.Action("DeleteYagnaMember", "Admin")',
+            data: { YagnaMemberId: isToDelete },
+            success: function (data) {
+                if (data.IsSuccess) {
+                    $('#deleteConfirmModal [data-dismiss="modal"]').click();
+                    isToDelete = 0;
+                    window.location.reload();
+                }
+                else {
+                    alert(data.ResponseValue);
+                }
+            }
+        });
+    }
+</script>

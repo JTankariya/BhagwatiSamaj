@@ -1,0 +1,483 @@
+﻿@model BhagwatiSamaj.Models.Family
+@{
+    ViewBag.Title = "FamilyDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="width:100%;margin: 0px auto">
+    <div class="col-sm-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <a data-toggle="collapse" data-target="#headPanel"
+                       href="#headPanel">
+                        <i class="fa fa-tasks"></i>Family Head Info
+                    </a>
+                </h3>
+            </div>
+            <div id="headPanel" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            @if (Model.PhotoPath != null && Model.PhotoPath.Length > 0)
+                            {
+                                <img alt="" style="max-height: 300px;margin: 0px auto; max-width: 200px;" src="@(Url.Content(Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["FamilyPhotoPath"])+Model.PhotoPath))" class="img-responsive">
+                            }
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h1> @((Model.FirstName + " " + Model.MiddleName + " " + Model.LastName).ToUpper())</h1>
+                                </div>
+                            </div>
+                            <hr />
+                            @if (Model.CurrentAddress == Model.PermenentAddress)
+                            {
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <b>Address</b> : @(Model.PermenentAddress + "," + Model.City + "," + Model.State + "," + Model.Country)
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <b>Current Address :</b> @(Model.CurrentAddress + "," + Model.City + "," + Model.State + "," + Model.Country)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <b>Permenent Address :</b> @(Model.PermenentAddress + "," + Model.City + "," + Model.State + "," + Model.Country)
+                                    </div>
+                                </div>
+                            }
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <b>Mobile No :</b> @Model.MobileNo
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <b>Gender :</b> @Model.Gender
+                                </div>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.ContactNo))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Contact No :</b> @Model.ContactNo
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.EmailId))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Email Id :</b> @Model.EmailId
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.MobileNo))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Mobile No :</b> @Model.MobileNo
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.MaritalStatus))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Marital Status :</b> @Model.MaritalStatus
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.MerriageVillage))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Merriage Village :</b> @Model.MerriageVillage
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Education))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Education :</b> @Model.Education
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.AnnualIncome))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Annual Income :</b> @Model.AnnualIncome
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.OtherSkills))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Other Skills :</b> @Model.OtherSkills
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.OccupationType))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Occupation Type :</b> @Model.OccupationType
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BusinessTitle))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Title :</b> @Model.BusinessTitle
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BusinessAddress))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Address :</b> @Model.BusinessAddress
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BusinessPosition))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Position :</b> @Model.BusinessPosition
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BusinessContactNo))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Contact No :</b> @Model.BusinessContactNo
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <a data-toggle="collapse" data-target="#fatherPanel"
+                       href="#fatherPanel">
+                        <i class="fa fa-tasks"></i>Father Info
+                    </a>
+                </h3>
+            </div>
+            <div id="fatherPanel" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            @if (Model.FatherImagePath != null && Model.FatherImagePath.Length > 0)
+                            {
+                                <img alt="" style="max-height: 300px;margin: 0px auto; max-width: 200px;" src="@(Url.Content(Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["FamilyPhotoPath"]) + Model.FatherImagePath))" class="img-responsive">
+                            }
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h1> @((Model.FatherFirstName + " " + Model.FatherMiddleName + " " + Model.FatherLastName).ToUpper())</h1>
+                                </div>
+                            </div>
+                            <hr />
+                            @if (!string.IsNullOrEmpty(Model.FatherAnnualIncome))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Annual Income :</b> @Model.FatherAnnualIncome
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.FatherOccupationType))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Occupation Type :</b> @Model.FatherOccupationType
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.FatherBusinessTitle))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Title :</b> @Model.FatherBusinessTitle
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.FatherBusinessAddress))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Address :</b> @Model.FatherBusinessAddress
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.FatherBusinessPosition))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Position :</b> @Model.FatherBusinessPosition
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.FatherBusinessContactNo))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Contact No :</b> @Model.FatherBusinessContactNo
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <a data-toggle="collapse" data-target="#motherPanel"
+                       href="#motherPanel">
+                        <i class="fa fa-tasks"></i>Mother Info
+                    </a>
+                </h3>
+            </div>
+            <div id="motherPanel" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            @if (Model.MotherImagePath != null && Model.MotherImagePath.Length > 0)
+                            {
+                                <img alt="" style="max-height: 300px;margin: 0px auto; max-width: 200px;" src="@(Url.Content(Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["FamilyPhotoPath"]) + Model.MotherImagePath))" class="img-responsive">
+                            }
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h1> @((Model.MotherFirstName + " " + Model.MotherMiddleName + " " + Model.MotherLastName).ToUpper())</h1>
+                                </div>
+                            </div>
+                            <hr />
+                            @if (!string.IsNullOrEmpty(Model.MotherAnnualIncome))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Annual Income :</b> @Model.MotherAnnualIncome
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.MotherOccupationType))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Occupation Type :</b> @Model.MotherOccupationType
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.MotherBusinessTitle))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Title :</b> @Model.MotherBusinessTitle
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.MotherBusinessAddress))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Address :</b> @Model.MotherBusinessAddress
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.MotherBusinessPosition))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Position :</b> @Model.MotherBusinessPosition
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.MotherBusinessContactNo))
+                            {
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <b>Business Contact No :</b> @Model.MotherBusinessContactNo
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        @if (Model.members != null && Model.members.Count > 0)
+        {
+            for (var i = 0; i < Model.members.Count; i++)
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a data-toggle="collapse" data-target="#@("member"+(i+1) + "Panel")"
+                               href="#@("member"+i + "Panel")">
+                                <i class="fa fa-tasks"></i>@("Member " + (i + 1) + " Info")
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="@("member"+(i+1) + "Panel")" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    @if (Model.members[i].PhotoPath != null && Model.members[i].PhotoPath.Length > 0)
+                                    {
+                                        <img alt="" style="max-height: 300px;margin: 0px auto; max-width: 200px;" src="@(Url.Content(Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["FamilyPhotoPath"]) + Model.members[i].PhotoPath))" class="img-responsive">
+                                    }
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h1> @((Model.members[i].FirstName + " " + Model.members[i].MiddleName + " " + Model.members[i].LastName).ToUpper())</h1>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    @if (!string.IsNullOrEmpty(Model.members[i].Gender))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Gender :</b> @Model.members[i].Gender
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].MaritalStatus))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Marital Status :</b> @Model.members[i].MaritalStatus
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].Relation))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Relation :</b> @Model.members[i].Relation
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].ContactNo))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Contact No :</b> @Model.ContactNo
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.EmailId))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Email Id :</b> @Model.members[i].EmailId
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].Education))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Education :</b> @Model.members[i].Education
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].OtherSkills))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Other Skills :</b> @Model.members[i].OtherSkills
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].AnnualIncome))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Annual Income :</b> @Model.members[i].AnnualIncome
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].OccupationType))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Occupation Type:</b> @Model.members[i].OccupationType
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].BusinessTitle))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Business Title :</b> @Model.members[i].BusinessTitle
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].BusinessAddress))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Business Address :</b> @Model.members[i].BusinessAddress
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].BusinessPosition))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Business Position :</b> @Model.members[i].BusinessPosition
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.members[i].BusinessContactNo))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <b>Business Contact No :</b> @Model.members[i].BusinessContactNo
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        }
+
+    </div>
+</div>

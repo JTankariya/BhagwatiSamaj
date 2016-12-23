@@ -1,0 +1,134 @@
+﻿@model BhagwatiSamaj.Models.User
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--=== Content Part ===-->
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <form id="NewRegistration" class="reg-page">
+                <div class="reg-header">
+                    <h2>Register a new account</h2>
+                    <p>Already Signed Up? Click <a href="@Url.Action("Signin","Account")" class="color-green">Sign In</a> to login your account.</p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                         <label>First Name</label>
+                         @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control margin-bottom-20", @id = "txtFirstName" })
+                         <label id="lblFirstName" style="color:red;display:none"></label>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Last Name</label>
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control margin-bottom-20", @id = "txtLastName" })
+                        <label id="lblLastName" style="color:red;display:none"></label>
+                    </div>
+                </div>
+                <label>User Name</label>
+                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control margin-bottom-20", @id = "txtUserName" })
+                <label id="lblUserName" style="color:red;display:none"></label><br />
+                <label>Email Address <span class="color-red">*</span></label>
+                @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control margin-bottom-20", @id = "txtEmailId" })
+                <label id="lblEmailId" style="color:red;display:none"></label><br />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Password <span class="color-red">*</span></label>
+                        @Html.TextBoxFor(x => x.Password, new { @type = "password", @class = "form-control margin-bottom-20", @id = "txtPassword" })
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Confirm Password <span class="color-red">*</span></label>
+                        <input type="password" class="form-control margin-bottom-20" id="txtConfirmPassword">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label id="lblPassword" style="color:red;display:none"></label>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            I read <a href="#" class="color-green">Terms and Conditions</a>
+                        </label>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button class="btn-u" type="button" onclick="RegisterUser()">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><!--/container-->
+<!--=== End Content Part ===-->
+
+<script>
+    function RegisterUser() {
+        var isValid = true;
+        if ($('#txtFirstName').val() == "") {
+            $('#lblFirstName').html("Please enter First Name.").fadeIn();
+            isValid = false;
+        }
+        else {
+            $('#lblFirstName').fadeOut();
+        }
+        if ($('#txtLastName').val() == "") {
+            $('#lblLastName').html("Please enter Last Name.").fadeIn();
+            isValid = false;
+        }
+        else {
+            $('#lblLastName').fadeOut();
+        }
+        if ($('#txtUserName').val() == "") {
+            $('#lblUserName').html("Please enter User Name.").fadeIn();
+            isValid = false;
+        }
+        else {
+            $('#lblUserName').fadeOut();
+        }
+        if ($('#txtEmailId').val() == "") {
+            $('#lblEmailId').html("Please enter Email Id.").fadeIn();
+            isValid = false;
+        }
+        else {
+            $('#lblEmailId').fadeOut();
+        }
+        if ($('#txtPassword').val() != $('#txtConfirmPassword').val()) {
+            $('#lblPassword').html("Password is not matched with confirm password.").fadeIn();
+            isValid = false;
+        }
+        else {
+            $('#lblPassword').fadeOut();
+        }
+        if ($('#txtPassword').val() == "") {
+            $('#lblPassword').html("Please enter Password.").fadeIn();
+            isValid = false;
+        }
+        else {
+            $('#lblPassword').fadeOut();
+        }
+        if ($('#txtEmailId').val() != "" && !isEmail($('#txtEmailId').val())) {
+            $('#lblEmailId').html("Please enter proper Email Id.").fadeIn();
+            isValid = false;
+        }
+
+        if (isValid) {
+            $.ajax({
+                data: $('#NewRegistration').serialize(),
+                url: '@Url.Action("Register", "Account")',
+                type: "POST",
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        window.location.href = "@Url.Action("SignIn","Account")";
+                    }
+                    else {
+                        alert(data.ResponseValue);
+                    }
+                }
+            })
+        }
+    }
+
+</script>

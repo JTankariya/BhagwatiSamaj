@@ -1,0 +1,64 @@
+﻿@model BhagwatiSamaj.Models.YagnaMember
+@{
+    ViewBag.Title = "EditYagnaMember";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form id="YagnaMemberInfo" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                Name : @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                @Html.HiddenFor(x => x.Id)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                Address : @Html.TextAreaFor(x => x.Address, new { @class = "form-control", @rows = "3" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                Mobile : @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-success" onclick="SaveYagnaMember()"><span class="glyphicon glyphicon-plus"></span> &nbsp;&nbsp;Save Member</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    var removeYagnaMemberCtrl = "", removeYagnaMemberId = "";
+
+    function SaveYagnaMember() {
+        if (ValidateYagnaMember()) {
+            var formData = new FormData($("#YagnaMemberInfo")[0]);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SaveYagnaMember","Admin")',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        alert("Yagna Member Saved Successfully.");
+                        window.location.href = '@Url.Action("YagnaMemberList","Admin")';
+                    }
+                    else {
+                        alert(data.ResponseValue);
+                    }
+                }
+            });
+        }
+    }
+
+    function ValidateYagnaMember() {
+        return true;
+    }
+</script>
